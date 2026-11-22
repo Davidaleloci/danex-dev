@@ -1,0 +1,135 @@
+<section class="architecture" id="architecture">
+  <div class="architecture__header">
+    <span class="architecture__badge">Ingeniería &bull; Diseño de Sistemas</span>
+    <h2 class="architecture__title">Arquitectura Empresarial en Tres Capas</h2>
+    <p class="architecture__subtitle">
+      Esquema de distribución desacoplada implementado en proyectos como <strong>HILDAX S.A.C.</strong>, asegurando alta disponibilidad, seguridad por capas y escalabilidad independiente.
+    </p>
+  </div>
+
+  <div class="architecture__grid">
+    <!-- Visual Interactive 3-Layer Diagram -->
+    <div class="architecture__diagram">
+      <!-- Presentation Layer Box -->
+      <div 
+        class="architecture__layer-box" 
+        [class.architecture__layer-box--active]="selectedLayer.id === 'frontend'"
+        (click)="selectLayer(layers[0])"
+        (mouseenter)="selectLayer(layers[0])">
+        <div class="architecture__layer-icon architecture__layer-icon--frontend">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <div class="architecture__layer-info">
+          <span class="architecture__layer-order">Capa 01</span>
+          <h3 class="architecture__layer-name">Capa de Presentación</h3>
+          <span class="architecture__layer-tech">Angular &bull; SPA Reactiva</span>
+        </div>
+        <span class="architecture__active-indicator" *ngIf="selectedLayer.id === 'frontend'">ACTIVA</span>
+      </div>
+
+      <!-- Connector 1 -->
+      <div class="architecture__pipe">
+        <div class="architecture__pipe-line"></div>
+        <span class="architecture__pipe-label">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
+            <path d="M8 3v10M4 9l4 4 4-4"/>
+          </svg>
+          HTTPS / JSON RESTful APIs
+        </span>
+        <div class="architecture__pipe-line"></div>
+      </div>
+
+      <!-- Business Layer Box -->
+      <div 
+        class="architecture__layer-box" 
+        [class.architecture__layer-box--active]="selectedLayer.id === 'backend'"
+        (click)="selectLayer(layers[1])"
+        (mouseenter)="selectLayer(layers[1])">
+        <div class="architecture__layer-icon architecture__layer-icon--backend">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+            <line x1="6" y1="6" x2="6.01" y2="6"/>
+            <line x1="6" y1="18" x2="6.01" y2="18"/>
+          </svg>
+        </div>
+        <div class="architecture__layer-info">
+          <span class="architecture__layer-order">Capa 02</span>
+          <h3 class="architecture__layer-name">Capa de Negocio</h3>
+          <span class="architecture__layer-tech">Spring Boot &bull; REST &amp; JWT</span>
+        </div>
+        <span class="architecture__active-indicator" *ngIf="selectedLayer.id === 'backend'">ACTIVA</span>
+      </div>
+
+      <!-- Connector 2 -->
+      <div class="architecture__pipe">
+        <div class="architecture__pipe-line"></div>
+        <span class="architecture__pipe-label">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12">
+            <path d="M8 3v10M4 9l4 4 4-4"/>
+          </svg>
+          TCP / HikariCP JDBC Connection Pool
+        </span>
+        <div class="architecture__pipe-line"></div>
+      </div>
+
+      <!-- Persistence Layer Box -->
+      <div 
+        class="architecture__layer-box" 
+        [class.architecture__layer-box--active]="selectedLayer.id === 'database'"
+        (click)="selectLayer(layers[2])"
+        (mouseenter)="selectLayer(layers[2])">
+        <div class="architecture__layer-icon architecture__layer-icon--database">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+        </div>
+        <div class="architecture__layer-info">
+          <span class="architecture__layer-order">Capa 03</span>
+          <h3 class="architecture__layer-name">Capa de Persistencia</h3>
+          <span class="architecture__layer-tech">MySQL 8.0 &bull; Docker Container</span>
+        </div>
+        <span class="architecture__active-indicator" *ngIf="selectedLayer.id === 'database'">ACTIVA</span>
+      </div>
+    </div>
+
+    <!-- Technical Specification Detail Panel -->
+    <div class="architecture__details">
+      <div class="architecture__details-header">
+        <div class="architecture__spec-tag-row">
+          <span class="architecture__details-badge">Especificación Técnica</span>
+          <span class="architecture__protocol-badge">{{ selectedLayer.protocol }}</span>
+        </div>
+        <h3 class="architecture__details-title">{{ selectedLayer.name }}</h3>
+        <p class="architecture__details-tech">{{ selectedLayer.tech }}</p>
+      </div>
+      
+      <div class="architecture__details-body">
+        <p class="architecture__details-desc">{{ selectedLayer.description }}</p>
+        
+        <h4 class="architecture__features-title">Garantías &amp; Responsabilidades de Ingeniería:</h4>
+        <ul class="architecture__features-list">
+          <li *ngFor="let feature of selectedLayer.features">
+            <svg class="architecture__feature-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 8 6.5 11.5 13 4.5"/>
+            </svg>
+            <span>{{ feature }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="architecture__details-footer">
+        <span class="architecture__status-tag">
+          <span class="architecture__status-dot"></span>
+          Arquitectura Auditada &amp; Probada en Producción
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

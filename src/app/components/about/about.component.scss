@@ -1,0 +1,210 @@
+@import '../../../styles/variables';
+
+.about {
+  padding: 5rem 0;
+
+  &__header {
+    margin-bottom: 3rem;
+    max-width: 740px;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-primary;
+    background-color: rgba($color-primary, 0.08);
+    border: 1px solid rgba($color-primary, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 0.85rem;
+  }
+
+  &__title {
+    font-size: clamp(1.85rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    color: $text-main;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  &__subtitle {
+    font-size: 1.05rem;
+    color: $text-muted;
+    line-height: 1.6;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  &__card {
+    background-color: $bg-surface;
+    border: 1px solid $border-color;
+    border-radius: 14px;
+    padding: 2.25rem;
+    box-shadow: $shadow-md;
+  }
+
+  &__card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: $text-main;
+    margin-bottom: 1.25rem;
+  }
+
+  &__text {
+    color: $text-muted;
+    font-size: 0.96rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+
+    strong {
+      color: $text-main;
+    }
+  }
+
+  &__competencies {
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba($border-color, 0.8);
+  }
+
+  &__competencies-title {
+    font-family: $font-mono;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    color: $text-subtle;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.85rem;
+  }
+
+  &__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__pill {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    background-color: rgba($bg-elevated, 0.8);
+    color: $text-body;
+    border: 1px solid $border-color;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $color-primary;
+      color: $color-primary;
+    }
+  }
+
+  /* Timeline */
+  &__timeline-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__timeline-heading {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: $text-main;
+    margin-bottom: 1.5rem;
+  }
+
+  &__timeline {
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 2px solid $border-color;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__timeline-item {
+    position: relative;
+  }
+
+  &__timeline-dot {
+    position: absolute;
+    left: calc(-1.5rem - 7px);
+    top: 16px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: $color-primary;
+    border: 3px solid $bg-main;
+    box-shadow: 0 0 10px rgba($color-primary, 0.6);
+  }
+
+  &__timeline-box {
+    background-color: $bg-surface;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all $transition-base;
+
+    &:hover {
+      border-color: rgba($color-primary, 0.35);
+      background-color: $bg-surface-hover;
+      transform: translateX(4px);
+    }
+  }
+
+  &__timeline-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__timeline-tag {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $color-primary;
+  }
+
+  &__timeline-date {
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    color: $text-subtle;
+    background-color: rgba(255, 255, 255, 0.04);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  &__timeline-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $text-main;
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+  }
+
+  &__timeline-desc {
+    font-size: 0.88rem;
+    color: $text-muted;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .about {
+    &__container {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+}

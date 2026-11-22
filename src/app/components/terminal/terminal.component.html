@@ -1,0 +1,69 @@
+<!-- Botón Flotante para Abrir la Consola Terminal -->
+<button 
+  class="terminal-btn" 
+  (click)="toggleTerminal()" 
+  [class.terminal-btn--active]="isOpen" 
+  title="Terminal de Ingeniería (CLI)">
+  <svg *ngIf="!isOpen" class="terminal-btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="4 17 10 11 4 5"/>
+    <line x1="12" y1="19" x2="20" y2="19"/>
+  </svg>
+  <svg *ngIf="isOpen" class="terminal-btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18"/>
+    <line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+  <span class="terminal-btn__tooltip" *ngIf="!isOpen">CLI</span>
+</button>
+
+<!-- Ventana Terminal -->
+<div class="terminal" *ngIf="isOpen">
+  <div class="terminal__header">
+    <div class="terminal__dots">
+      <span class="terminal__dot terminal__dot--red" (click)="toggleTerminal()" title="Cerrar"></span>
+      <span class="terminal__dot terminal__dot--yellow" title="Minimizar"></span>
+      <span class="terminal__dot terminal__dot--green" title="Maximizar"></span>
+    </div>
+    <div class="terminal__title">
+      <span class="terminal__title-host">danex&#64;core-terminal</span>
+      <span class="terminal__title-path">:~</span>
+    </div>
+    <div class="terminal__header-actions">
+      <span class="terminal__shell-badge">BASH 5.2</span>
+    </div>
+  </div>
+
+  <div class="terminal__body" #scrollContainer>
+    <div class="terminal__history">
+      <div *ngFor="let line of history" class="terminal__line" [ngClass]="'terminal__line--' + line.type">
+        {{ line.text }}
+      </div>
+    </div>
+
+    <div class="terminal__prompt-line">
+      <span class="terminal__prompt">danex.dev&#64;guest:~$</span>
+      <input 
+        #cliInput
+        type="text" 
+        class="terminal__input" 
+        [(ngModel)]="currentInput"
+        (keydown.enter)="handleCommand()"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Entrada de línea de comandos terminal"
+      >
+    </div>
+  </div>
+
+  <!-- Barra de Comandos Rápidos (Especialmente útil en móviles) -->
+  <div class="terminal__quick-bar">
+    <span class="terminal__quick-label">Atajos:</span>
+    <div class="terminal__quick-chips">
+      <button 
+        *ngFor="let cmd of quickCommands" 
+        class="terminal__chip" 
+        (click)="runQuickCommand(cmd)">
+        {{ cmd }}
+      </button>
+    </div>
+  </div>
+</div>

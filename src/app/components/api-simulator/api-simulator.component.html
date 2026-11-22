@@ -1,0 +1,119 @@
+<section class="simulator" id="api-simulator">
+  <div class="simulator__header">
+    <span class="simulator__badge">Interactividad &bull; Sandbox Backend</span>
+    <h2 class="simulator__title">Consola de API RESTful Interactiva</h2>
+    <p class="simulator__subtitle">
+      Ejecuta y examina en tiempo real las estructuras de datos, contratos JSON y códigos de estado que diseñé para los microservicios backend.
+    </p>
+  </div>
+
+  <div class="simulator__container">
+    <!-- Panel Izquierdo: Configuración del Request -->
+    <div class="simulator__request-panel">
+      <div class="simulator__field">
+        <label class="simulator__label" for="endpoint-select">Seleccionar Endpoint de Prueba:</label>
+        <div class="simulator__select-wrapper">
+          <select id="endpoint-select" class="simulator__select" (change)="changeEndpoint($event)">
+            <option *ngFor="let ep of endpoints; let i = index" [value]="i">
+              [{{ ep.method }}] {{ ep.project }} &bull; {{ ep.path }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="simulator__info-card">
+        <div class="simulator__info-header">
+          <span class="simulator__project-badge">{{ selectedEndpoint.project }}</span>
+          <span class="simulator__protocol-tag">REST / HTTP 1.1</span>
+        </div>
+        <p class="simulator__endpoint-desc">{{ selectedEndpoint.description }}</p>
+      </div>
+
+      <!-- Barra de URL y Botón de Enviar -->
+      <div class="simulator__url-bar">
+        <span class="simulator__method-tag" [attr.data-method]="selectedEndpoint.method">
+          {{ selectedEndpoint.method }}
+        </span>
+        <div class="simulator__url-display">
+          <span class="simulator__url-host">https://api.danex.dev</span>
+          <span class="simulator__url-path">{{ selectedEndpoint.path }}</span>
+        </div>
+        <button class="simulator__send-btn" (click)="sendRequest()" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Disparar Petición</span>
+          <span *ngIf="isLoading">Ejecutando...</span>
+          <svg *ngIf="!isLoading" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+            <polygon points="5 3 12 8 5 13 5 3"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Request Body (si aplica) -->
+      <div class="simulator__payload" *ngIf="selectedEndpoint.requestBody">
+        <div class="simulator__payload-header">
+          <label class="simulator__label">Payload de Entrada (JSON Request Body):</label>
+          <span class="simulator__format-tag">application/json</span>
+        </div>
+        <pre class="simulator__code-block"><code>{{ selectedEndpoint.requestBody | json }}</code></pre>
+      </div>
+    </div>
+
+    <!-- Panel Derecho: Consola de Respuesta JSON -->
+    <div class="simulator__response-panel">
+      <div class="simulator__console-header">
+        <div class="simulator__console-meta">
+          <div class="simulator__console-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="simulator__console-title">Output de Respuesta del Servidor</span>
+        </div>
+
+        <div class="simulator__console-actions" *ngIf="showResponse">
+          <span class="simulator__latency-badge">{{ latencyMs }} ms</span>
+          <span class="simulator__status-badge" [class.status-200]="httpStatus === 200 || httpStatus === 201">
+            HTTP {{ httpStatus }} {{ httpStatus === 201 ? 'CREATED' : 'OK' }}
+          </span>
+          <button class="simulator__copy-btn" (click)="copyResponse()" title="Copiar respuesta JSON">
+            <svg *ngIf="!copySuccess" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" width="14" height="14">
+              <rect x="5" y="5" width="8" height="8" rx="1.5"/>
+              <path d="M3 11V3.5A1.5 1.5 0 0 1 4.5 2H11"/>
+            </svg>
+            <svg *ngIf="copySuccess" viewBox="0 0 16 16" fill="none" stroke="#10b981" stroke-width="1.8" width="14" height="14">
+              <polyline points="3 8 6.5 11.5 13 4.5"/>
+            </svg>
+            <span>{{ copySuccess ? 'Copiado' : 'Copiar' }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="simulator__console-body">
+        <!-- Estado Inicial: Placeholder -->
+        <div class="simulator__placeholder" *ngIf="!isLoading && !showResponse">
+          <div class="simulator__placeholder-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="36" height="36">
+              <polyline points="4 17 10 11 4 5"/>
+              <line x1="12" y1="19" x2="20" y2="19"/>
+            </svg>
+          </div>
+          <h4>Consola en Espera</h4>
+          <p>Presiona el botón <strong>"Disparar Petición"</strong> para enviar la solicitud HTTP y observar la respuesta transaccional.</p>
+        </div>
+
+        <!-- Estado Cargando: Spinner -->
+        <div class="simulator__loader" *ngIf="isLoading">
+          <div class="simulator__spinner"></div>
+          <p class="simulator__loader-text">Conectando con api.danex.dev...</p>
+          <span class="simulator__loader-sub">Procesando reglas de negocio &amp; persistencia</span>
+        </div>
+
+        <!-- Estado Éxito: Salida JSON Formateada -->
+        <div class="simulator__result-wrapper" *ngIf="showResponse">
+          <div class="simulator__response-info-bar">
+            <span>Content-Type: application/json; charset=utf-8</span>
+            <span>Cache-Control: no-cache</span>
+          </div>
+          <pre class="simulator__json-output"><code>{{ selectedEndpoint.responseBody | json }}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

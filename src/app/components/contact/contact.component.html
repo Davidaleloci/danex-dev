@@ -1,0 +1,146 @@
+<section class="contact" id="contact">
+  <div class="contact__box">
+    <!-- Columna Izquierda: Información de Contacto -->
+    <div class="contact__info">
+      <span class="contact__badge">Contacto &bull; Colaboración</span>
+      <h2 class="contact__title">¿Listo para construir el próximo sistema?</h2>
+      <p class="contact__text">
+        Estoy disponible para posiciones de desarrollo de software, consultoría técnica y proyectos empresariales complejos. 
+        Si buscas un profesional con capacidad analítica, foco en arquitectura limpia y compromiso ágil, hablemos.
+      </p>
+
+      <div class="contact__channels">
+        <a href="mailto:danex.dev@gmail.com" class="contact__channel-card">
+          <div class="contact__channel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="contact__channel-info">
+            <span class="contact__channel-label">Correo Electrónico Directo</span>
+            <span class="contact__channel-val">contacto@danex.dev</span>
+          </div>
+          <svg class="contact__channel-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M3.333 8h9.334M8.667 4l4 4-4 4"/>
+          </svg>
+        </a>
+
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact__channel-card">
+          <div class="contact__channel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+          </div>
+          <div class="contact__channel-info">
+            <span class="contact__channel-label">Repositorio de Código</span>
+            <span class="contact__channel-val">github.com/danex-dev</span>
+          </div>
+          <svg class="contact__channel-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M3.333 8h9.334M8.667 4l4 4-4 4"/>
+          </svg>
+        </a>
+
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact__channel-card">
+          <div class="contact__channel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </div>
+          <div class="contact__channel-info">
+            <span class="contact__channel-label">Red Profesional</span>
+            <span class="contact__channel-val">linkedin.com/in/danex-dev</span>
+          </div>
+          <svg class="contact__channel-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M3.333 8h9.334M8.667 4l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Columna Derecha: Formulario de Mensaje -->
+    <div class="contact__form-wrapper">
+      <div class="contact__form-header">
+        <h3 class="contact__form-title">Enviar Mensaje Directo</h3>
+        <span class="contact__form-status">Canal Cifrado SSL</span>
+      </div>
+
+      <!-- Banner de Éxito -->
+      <div class="contact__alert contact__alert--success" *ngIf="submitSuccess">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <polyline points="3 8 6.5 11.5 13 4.5"/>
+        </svg>
+        <span>¡Mensaje transmitido con éxito! Responderé a la brevedad posible.</span>
+      </div>
+
+      <!-- Banner de Error -->
+      <div class="contact__alert contact__alert--error" *ngIf="errorMessage">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <circle cx="8" cy="8" r="6"/>
+          <line x1="8" y1="5" x2="8" y2="9"/>
+          <circle cx="8" cy="11.5" r="0.5" fill="currentColor"/>
+        </svg>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <form class="contact__form" (ngSubmit)="onSubmit()">
+        <div class="contact__field-group">
+          <label class="contact__label" for="contact-name">Nombre Completo *</label>
+          <input 
+            class="contact__input" 
+            type="text" 
+            id="contact-name" 
+            name="name"
+            placeholder="Ej. Ing. Alex Romero" 
+            [(ngModel)]="formData.name"
+            required>
+        </div>
+        
+        <div class="contact__field-group">
+          <label class="contact__label" for="contact-email">Correo Electrónico *</label>
+          <input 
+            class="contact__input" 
+            type="email" 
+            id="contact-email" 
+            name="email"
+            placeholder="correo@empresa.com" 
+            [(ngModel)]="formData.email"
+            required>
+        </div>
+
+        <div class="contact__field-group">
+          <label class="contact__label" for="contact-subject">Asunto / Contexto</label>
+          <input 
+            class="contact__input" 
+            type="text" 
+            id="contact-subject" 
+            name="subject"
+            placeholder="Ej. Oportunidad Full-Stack / Desarrollo de Sistema" 
+            [(ngModel)]="formData.subject">
+        </div>
+
+        <div class="contact__field-group">
+          <label class="contact__label" for="contact-message">Detalles del Mensaje o Proyecto *</label>
+          <textarea 
+            class="contact__textarea" 
+            id="contact-message" 
+            name="message"
+            rows="4" 
+            placeholder="Describe brevemente tus requerimientos técnicos, stack esperado o propuesta..." 
+            [(ngModel)]="formData.message"
+            required></textarea>
+        </div>
+
+        <button class="contact__submit-btn" type="submit" [disabled]="isSubmitting">
+          <span *ngIf="!isSubmitting">Enviar Comunicación</span>
+          <span *ngIf="isSubmitting">Procesando Envío...</span>
+          <svg *ngIf="!isSubmitting" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+            <path d="M14 2L2 7.5l5 2 2 5L14 2z"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

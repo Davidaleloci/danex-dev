@@ -1,1 +1,122 @@
-/* You can add global styles to this file, and also import other style files */
+// ==============================================================================
+// danex.dev - Global Stylesheet
+// ==============================================================================
+@import './styles/variables';
+
+// Google Fonts: Inter (Interface) & JetBrains Mono (Code/Specs)
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+// Universal CSS Reset & Box Sizing
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+  color-scheme: dark;
+}
+
+body {
+  background-color: $bg-main;
+  color: $text-body;
+  font-family: $font-sans;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(99, 102, 241, 0.03) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+// Custom Technical Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-main;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-light;
+  border-radius: 4px;
+
+  &:hover {
+    background: lighten($border-light, 12%);
+  }
+}
+
+// Layout Container
+main {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  margin-top: 75px;
+}
+
+// Shared Section Utilities
+.section-header {
+  margin-bottom: 3rem;
+  max-width: 720px;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $color-primary;
+  background-color: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 0.85rem;
+}
+
+.section-title {
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: $text-main;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: $text-muted;
+  line-height: 1.6;
+}
+
+// Monospace Code Elements
+code, pre, .font-mono {
+  font-family: $font-mono;
+}
+
+// Buttons & Link Baselines
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+// Selection styling
+::selection {
+  background-color: rgba(56, 189, 248, 0.25);
+  color: $text-main;
+}

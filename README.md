@@ -1,27 +1,31 @@
-# Portafolio
+# danex.dev — Web Portafolio Profesional
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+Portafolio web de ingeniería de software y arquitectura de sistemas desarrollado con **Angular 16**, **TypeScript** y **SCSS Modular**.
 
-## Development server
+## Características del Proyecto
+- **Identidad & Branding:** Identidad técnica profesional bajo `danex.dev`.
+- **Diseño Responsivo:** Soporte multidispositivo con menú móvil desplegable (drawer) y diseño fluido.
+- **Sin Clichés de IA / Emojis:** Iconografía vectorial SVG de precisión técnica y tipografía para desarrolladores (`Inter` + `JetBrains Mono`).
+- **Arquitectura Multicapa:** Diagrama interactivo de arquitectura en 3 capas (Presentación, Negocio, Persistencia) con selección dinámica.
+- **Consola de API RESTful Interactiva:** Sandbox para probar endpoints (`GET`, `POST`), simulación de latencia de red, renderizado de payloads y opción de copiado al portapapeles.
+- **Terminal CLI Emulada:** Consola interactiva flotante con soporte para comandos de sistema (`help`, `skills`, `projects`, `hildax`, `api`, `contact`, `clear`, `exit`) y chips de comandos rápidos para móviles.
+- **Formulario de Contacto Funcional:** Validación reactiva y canales directos de comunicación.
+- **Optimización de Estilos SCSS:** Sistema de tokens de diseño desacoplado (`_variables.scss`) sin duplicación de CSS en bundles de componentes.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Ejecución Local
 
-## Code scaffolding
+Para levantar el servidor de desarrollo:
+```bash
+npm start
+# o
+ng serve
+```
+Navega a `http://localhost:4200/`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Compilación para Producción
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para compilar la aplicación optimizada para despliegue:
+```bash
+npm run build
+```
+Los archivos de salida listos para desplegar en hosting estático (Vercel, Netlify, GitHub Pages, Render) se generarán en `dist/portafolio/`.

@@ -1,0 +1,105 @@
+<header class="navbar" [class.navbar--scrolled]="isScrolled">
+  <div class="navbar__container">
+    <a href="#" class="navbar__logo" (click)="closeMobileMenu()">
+      <img src="assets/logo-danex.png" alt="DANEX | DEV" class="navbar__logo-img">
+      <span class="navbar__status-indicator" title="Sistemas Operacionales &amp; Disponible"></span>
+    </a>
+    
+    <!-- Navegación de Escritorio -->
+    <nav class="navbar__nav">
+      <ul class="navbar__list">
+        <li class="navbar__item">
+          <a href="#skills" class="navbar__link">Habilidades</a>
+        </li>
+        <li class="navbar__item">
+          <a href="#projects" class="navbar__link">Proyectos</a>
+        </li>
+        <li class="navbar__item">
+          <a href="#architecture" class="navbar__link">Arquitectura</a>
+        </li>
+        <li class="navbar__item">
+          <a href="#api-simulator" class="navbar__link">Consola API</a>
+        </li>
+        <li class="navbar__item">
+          <a href="#about" class="navbar__link">Trayectoria</a>
+        </li>
+      </ul>
+
+      <div class="navbar__actions">
+        <a href="#contact" class="navbar__cta-btn">
+          <span>Iniciar Contacto</span>
+          <svg class="navbar__cta-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Botón Hamburguesa Móvil -->
+    <button 
+      class="navbar__toggle-btn" 
+      (click)="toggleMobileMenu()" 
+      [attr.aria-expanded]="isMobileMenuOpen" 
+      aria-label="Abrir menú de navegación">
+      <svg *ngIf="!isMobileMenuOpen" class="navbar__toggle-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg *ngIf="isMobileMenuOpen" class="navbar__toggle-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Menú Desplegable Móvil -->
+  <div class="navbar__mobile-drawer" [class.navbar__mobile-drawer--open]="isMobileMenuOpen">
+    <div class="navbar__mobile-backdrop" (click)="closeMobileMenu()"></div>
+    <div class="navbar__mobile-content">
+      <div class="navbar__mobile-header">
+        <img src="assets/logo-danex.png" alt="DANEX | DEV" class="navbar__mobile-logo-img">
+        <span class="navbar__mobile-sub">Software Engineer &bull; Portafolio</span>
+      </div>
+
+      <ul class="navbar__mobile-list">
+        <li class="navbar__mobile-item">
+          <a href="#skills" class="navbar__mobile-link" (click)="closeMobileMenu()">
+            <span class="navbar__mobile-num">01</span>
+            <span>Habilidades Técnicas</span>
+          </a>
+        </li>
+        <li class="navbar__mobile-item">
+          <a href="#projects" class="navbar__mobile-link" (click)="closeMobileMenu()">
+            <span class="navbar__mobile-num">02</span>
+            <span>Proyectos Destacados</span>
+          </a>
+        </li>
+        <li class="navbar__mobile-item">
+          <a href="#architecture" class="navbar__mobile-link" (click)="closeMobileMenu()">
+            <span class="navbar__mobile-num">03</span>
+            <span>Diseño de Arquitectura</span>
+          </a>
+        </li>
+        <li class="navbar__mobile-item">
+          <a href="#api-simulator" class="navbar__mobile-link" (click)="closeMobileMenu()">
+            <span class="navbar__mobile-num">04</span>
+            <span>Consola de API Interactiva</span>
+          </a>
+        </li>
+        <li class="navbar__mobile-item">
+          <a href="#about" class="navbar__mobile-link" (click)="closeMobileMenu()">
+            <span class="navbar__mobile-num">05</span>
+            <span>Sobre Mí &amp; Trayectoria</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="navbar__mobile-footer">
+        <a href="#contact" class="navbar__mobile-cta" (click)="closeMobileMenu()">
+          <span>Contactar Desarrollador</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+            <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
