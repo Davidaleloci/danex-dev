@@ -1,0 +1,29 @@
+# Git
+.git
+.gitignore
+
+# Dependencias y compilaciones locales
+node_modules
+dist
+.angular
+
+# Entornos y logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+.env
+.env.*
+
+# IDEs y editores
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

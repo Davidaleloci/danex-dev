@@ -1,31 +1,70 @@
 # danex.dev — Web Portafolio Profesional
 
-Portafolio web de ingeniería de software y arquitectura de sistemas desarrollado con **Angular 16**, **TypeScript** y **SCSS Modular**.
+Portafolio web de ingeniería de software y arquitectura de sistemas desarrollado con **Angular 16**, **TypeScript**, **SCSS Modular** y contenedorizado para producción con **Docker** y **Nginx**.
 
-## Características del Proyecto
-- **Identidad & Branding:** Identidad técnica profesional bajo `danex.dev`.
-- **Diseño Responsivo:** Soporte multidispositivo con menú móvil desplegable (drawer) y diseño fluido.
-- **Sin Clichés de IA / Emojis:** Iconografía vectorial SVG de precisión técnica y tipografía para desarrolladores (`Inter` + `JetBrains Mono`).
-- **Arquitectura Multicapa:** Diagrama interactivo de arquitectura en 3 capas (Presentación, Negocio, Persistencia) con selección dinámica.
-- **Consola de API RESTful Interactiva:** Sandbox para probar endpoints (`GET`, `POST`), simulación de latencia de red, renderizado de payloads y opción de copiado al portapapeles.
-- **Terminal CLI Emulada:** Consola interactiva flotante con soporte para comandos de sistema (`help`, `skills`, `projects`, `hildax`, `api`, `contact`, `clear`, `exit`) y chips de comandos rápidos para móviles.
-- **Formulario de Contacto Funcional:** Validación reactiva y canales directos de comunicación.
-- **Optimización de Estilos SCSS:** Sistema de tokens de diseño desacoplado (`_variables.scss`) sin duplicación de CSS en bundles de componentes.
+---
 
-## Ejecución Local
+## Características de la Aplicación
+- **Identidad & Branding:** Logotipo oficial `DANEX | DEV` y diseño de consola técnico `[danex.dev]`.
+- **Proyectos Insignia Destacados:**
+  - **OmniMark:** Plataforma y agente de marketing con IA generativa para creación automatizada de imágenes publicitarias y copys comerciales (Cliente: *PROTECLINE S.A.C.*).
+  - **PROTECEDU:** ERP de gestión educativa integral multi-tenant para Inicial (control de asistencia QR), Primaria/Secundaria (actas SIAGIE) y Superior (mallas curriculares por créditos).
+  - **HILDAX S.A.C.:** Sistema transaccional en 3 capas de inventarios y facturación.
+- **Consola de API RESTful Interactiva:** Pruebas en vivo con simulación de latencia de red, badges HTTP y formateador de JSON con botón para copiar al portapapeles.
+- **Terminal CLI Emulada:** Shell interactivo (`help`, `omnimark`, `protecedu`, `hildax`, `skills`, `clear`).
+- **Diseño 100% Responsivo:** Menú móvil *drawer*, sin emojis informales (iconografía vectorial SVG de precisión).
 
-Para levantar el servidor de desarrollo:
+---
+
+## Despliegue con Docker (Producción)
+
+El proyecto cuenta con una arquitectura de contenedorización de **múltiples etapas (*multi-stage build*)**:
+1. **Fase de Compilación (*Builder*):** `node:20-alpine` compila la aplicación Angular en modo de máxima optimización y emite los artefactos minificados.
+2. **Fase de Producción (*Web Server*):** `nginx:1.27-alpine` ultraligero (<30MB) sirve los archivos estáticos con compresión Gzip, cabeceras de seguridad y soporte para rutas SPA (*HTML5 pushState*).
+
+### Opción A: Usando Docker Compose (Recomendado)
+Desde la raíz del proyecto o dentro de `/portafolio`:
 ```bash
-npm start
-# o
-ng serve
+# Levantar el contenedor en segundo plano
+docker compose up -d --build
+
+# Ver los logs del servidor Nginx
+docker compose logs -f
+
+# Detener el contenedor
+docker compose down
 ```
-Navega a `http://localhost:4200/`.
+La aplicación estará disponible inmediatamente en `http://localhost/` (o en el puerto definido por la variable de entorno `PORT`).
 
-## Compilación para Producción
+### Opción B: Usando Docker CLI directamente
+```bash
+# 1. Construir la imagen de producción
+docker build -t danex-portfolio ./portafolio
 
-Para compilar la aplicación optimizada para despliegue:
+# 2. Ejecutar el contenedor
+docker run -d -p 80:80 --name danex-portfolio --restart unless-stopped danex-portfolio
+```
+
+### Opciones de Despliegue en la Nube
+- **Render / Railway / Fly.io:** Detectan automáticamente el `Dockerfile` y exponen el puerto 80 (o la variable `$PORT`).
+- **VPS (Ubuntu / Debian / DigitalOcean / AWS EC2):** Clona el repositorio y ejecuta `docker compose up -d --build`.
+- **Nginx Proxy Manager / Traefik / Cloudflare Tunnel:** Conecta fácilmente el contenedor mapeado al puerto 80 con certificados SSL/TLS automáticos.
+
+---
+
+## Ejecución Local sin Docker (Desarrollo)
+
+Requisitos: Node.js 18+ y npm.
+
+```bash
+cd portafolio
+npm install
+npm start
+```
+Abre `http://localhost:4200/`.
+
+## Compilación Manual
 ```bash
 npm run build
 ```
-Los archivos de salida listos para desplegar en hosting estático (Vercel, Netlify, GitHub Pages, Render) se generarán en `dist/portafolio/`.
+Genera la carpeta `dist/portafolio/` lista para ser servida.

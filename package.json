@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "docker:build": "docker build -t danex-portfolio .",
+    "docker:run": "docker run -d -p 80:80 --name danex-portfolio danex-portfolio",
+    "docker:compose": "docker compose up -d --build"
   },
   "private": true,
   "dependencies": {
